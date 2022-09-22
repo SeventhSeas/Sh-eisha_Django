@@ -1,0 +1,1 @@
+# Shūeisha_Django
