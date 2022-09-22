@@ -8,6 +8,7 @@
     overflow: hidden;
     position: fixed;
     background: #0b0b0b;
+    
     opacity: 0.8; }
   /*wrap*/
   .mfp-wrap {
@@ -19,8 +20,17 @@
     position: fixed;
     outline: none !important;
     -webkit-backface-visibility: hidden; }
+  
+    .nav-logo {
+      width: 50px;
+      height: 50px;
+      
+  }
+
+
   /*container*/
   .mfp-container {
+    
     text-align: center;
     position: absolute;
     width: 100%;
@@ -28,7 +38,9 @@
     left: 0;
     top: 0;
     padding: 0 8px;
-    box-sizing: border-box; }
+    box-sizing: border-box; 
+    
+  }
   
   .mfp-container:before {
     content: '';
