@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'froala_editor',
     'home',
     'ckeditor',
+    'crispy_forms',
     
 ]
 
