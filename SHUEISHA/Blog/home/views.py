@@ -133,3 +133,4 @@ def verify(request, token):
         print(e)
 
     return redirect('/')
+

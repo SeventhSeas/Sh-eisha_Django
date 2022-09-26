@@ -5,3 +5,4 @@ from .models import BlogModel, Profile
 
 admin.site.register(BlogModel)
 admin.site.register(Profile)
+
