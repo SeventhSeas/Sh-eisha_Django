@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/' , include('home.urls_api')),
     
     path('admin/', admin.site.urls),
+    
     path('froala_editor/',include('froala_editor.urls'))
 ]
 

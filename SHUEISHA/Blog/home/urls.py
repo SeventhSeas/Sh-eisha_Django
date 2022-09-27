@@ -13,5 +13,6 @@ urlpatterns = [
     path('blog-update/<slug>/', blog_update, name="blog_update"),
     path('logout-view/', logout_view, name="logout_view"),
     path('verify/<token>/', verify, name="verify"),
-   
+    path('post/<int:pk>/comment/', add_comment, name='add_comment'),
+
 ]
