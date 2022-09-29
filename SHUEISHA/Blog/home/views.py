@@ -2,7 +2,9 @@
 
 # Create your views here.
 
+from http.client import HTTPResponse
 from .form import *
+from django.db import models
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import logout
@@ -11,8 +13,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import BlogModel, Comment
 from django.contrib import messages
+from .form import BlogForm
 import uuid
 from django.db import models
+from django.shortcuts import render, HttpResponseRedirect,  render_to_response
+from django.template import RequestContext
+from django.contrib.auth import authenticate, login
 
 
 def logout_view(request):
@@ -148,16 +154,14 @@ def add_comment(request, pk):
     post = get_object_or_404(BlogModel, pk=pk)
     if request.method == 'POST':
         user = User.objects.get(id=request.POST.get('user_id'))
-        user_id = models.UUIDField(default=uuid.uuid4(), editable=False, unique=True)
+        #user_id = models.UUIDField(default=uuid.uuid4(), editable=False, unique=True)
         text = request.POST.get('text')
         Comment(author=user, post=post, text=text).save()
         messages.success(request, "Your comment has been added successfully.")
+       # return HttpResponseRedirect('Blog/add_comment.html', text= RequestContext(request))
     else:
-                 #                
-       
-           
-    
          # A la nueva interfaz de pantalla
-         return render(request, 'learning_logs/add_comment.html', text)
-    return redirect('post_detail', pk=pk)
+        #return render_to_response(request, 'Blog/add_comment.html', text= RequestContext(request))
+     return redirect('blog_detail', pk=pk)
+    return redirect('blog_detail', pk=pk)
  

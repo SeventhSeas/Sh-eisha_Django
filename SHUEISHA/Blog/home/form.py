@@ -9,3 +9,6 @@ class BlogForm(forms.ModelForm):
         model = BlogModel
         fields = ['title', 'content']
 
+class Meta:
+		model = Comment
+		fields = ('post', 'autor', 'text',)   

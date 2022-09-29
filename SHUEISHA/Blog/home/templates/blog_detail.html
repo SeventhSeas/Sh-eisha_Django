@@ -46,7 +46,7 @@
           <img class="d-flex mr-3 rounded-circle article-img" src="{{ comment.author.profile.image.url }}" alt="">
           <div class="media-body">
               <h5 class="mt-0"><a href="{% url 'user_posts' comment.author.username %}">{{ comment.author }}</a></h5>
-              {{ comment.text|linebreaks }}
+              {{ comment.text}}
               <hr>
           </div>
       </div>
