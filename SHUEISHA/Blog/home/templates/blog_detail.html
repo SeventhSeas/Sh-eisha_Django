@@ -24,7 +24,7 @@
    <div class="card my-4">
        <h5 class="card-header">Leave a Comment:</h5>
        <div class="card-body">
-           <form method="POST" action="{% url 'add_comment' user.id %}">
+           <form method="POST" action="{% url 'add_comment' user.id % }">
                {% csrf_token %}
                <div class="form-group">
                    <textarea class="form-control" name="text" rows="3" required></textarea>

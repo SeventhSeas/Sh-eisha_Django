@@ -1,9 +1,9 @@
 #from django.shortcuts import render, redirect
 
 # Create your views here.
-
+from django import forms
 from http.client import HTTPResponse
-from .form import *
+from .forms import *
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -11,15 +11,40 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import BlogModel, Comment
 from django.contrib import messages
-from .form import BlogForm
+from .forms import BlogForm
 import uuid
 from django.db import models
 from django.shortcuts import render, HttpResponseRedirect,  render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, "Your account has been updated!")
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'users/profile.html', context)
 
 def logout_view(request):
     logout(request)
@@ -158,10 +183,11 @@ def add_comment(request, pk):
         text = request.POST.get('text')
         Comment(author=user, post=post, text=text).save()
         messages.success(request, "Your comment has been added successfully.")
-       # return HttpResponseRedirect('Blog/add_comment.html', text= RequestContext(request))
+        return HttpResponseRedirect('Blog/add_comment.html', text= RequestContext(request))
     else:
          # A la nueva interfaz de pantalla
-        #return render_to_response(request, 'Blog/add_comment.html', text= RequestContext(request))
-     return redirect('blog_detail', pk=pk)
+        return render_to_response(request, 'Blog/add_comment.html', text= RequestContext(request))
     return redirect('blog_detail', pk=pk)
+    return redirect('blog_detail', pk=pk )
+    
  
