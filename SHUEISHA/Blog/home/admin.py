@@ -2,10 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import BlogModel, Profile, Comment
-
-
 admin.site.register(BlogModel)
 
+admin.site.register(Profile)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'post',
                     'approved_comment', 'created_date')
@@ -18,10 +17,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Comment, CommentAdmin)
 
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user')
-    list_display_links = ('id', 'user')
-    list_filter = ('user', )
-    list_per_page = 20
 
-admin.site.register(Profile, ProfileAdmin)
