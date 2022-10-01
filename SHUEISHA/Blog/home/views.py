@@ -1,18 +1,22 @@
 # Create your views here.
 
 # Create your views here.
-
+from django.http import HttpResponseRedirect
 from .form import *
+from django.http import HttpResponse   
+from .form import BlogForm
+from .models import BlogModel 
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+#from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import BlogModel, Comment
+
 from django.contrib import messages
-import uuid
-from django.db import models
+
+
+
 
 
 def logout_view(request):

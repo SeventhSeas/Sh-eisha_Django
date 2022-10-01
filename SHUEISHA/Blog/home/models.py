@@ -1,11 +1,16 @@
+from cgitb import text
 from importlib.resources import contents
+from mimetypes import init
 from django.db import models
 from django.contrib.auth.models import User
 from froala_editor.fields import FroalaField
 from django.utils import timezone
 from django.urls import reverse
 from .helpers import *
+from django.conf import settings
 from cgitb import text
+
+
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -32,9 +37,7 @@ class BlogModel(models.Model):
         self.slug = generate_slug(self.title)
         super(BlogModel, self).save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        return reverse('blog_detail', kwargs={'pk': self.pk})     
-        
+ 
 class Comment(models.Model):
     post = models.ForeignKey(
         BlogModel, related_name='comments', on_delete=models.CASCADE)
